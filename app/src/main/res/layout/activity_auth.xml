@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="128dp"
         android:layout_marginTop="164dp"
-        android:text="Авторизация"
+        android:text="@string/Auth"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,7 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/a_auth_b_enter"
         android:layout_width="119dp"
         android:layout_height="47dp"
         android:layout_marginStart="144dp"
@@ -54,10 +54,11 @@
         android:text="@string/enter"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/a_auth_password" />
+        app:layout_constraintTop_toBottomOf="@+id/a_auth_password"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/a_auth_tv_registration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
@@ -65,7 +66,7 @@
         android:text="@string/Registration"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/a_auth_b_enter" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

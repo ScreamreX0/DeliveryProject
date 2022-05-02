@@ -4,4 +4,8 @@
     <string name="password">Пароль</string>
     <string name="enter">Войти</string>
     <string name="Registration">Регистрация</string>
+    <string name="Auth">Авторизация</string>
+    <string name="firstName">Фамилия</string>
+    <string name="Name">Имя</string>
+    <string name="lastName">Отчество</string>
 </resources>
