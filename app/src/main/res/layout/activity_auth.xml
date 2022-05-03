@@ -19,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:text="a@gmail.com"
         android:id="@+id/a_auth_login"
         android:layout_width="234dp"
         android:layout_height="44dp"
@@ -32,6 +33,7 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
+        android:text="123123"
         android:id="@+id/a_auth_password"
         android:layout_width="234dp"
         android:layout_height="44dp"

@@ -5,13 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.deliveryproject.R;
 import com.example.deliveryproject.UserInfo;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -39,7 +40,22 @@ public class AuthActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Log.d("signin", "signInWithEmail:success");
                     UserInfo.fUser = mAuth.getCurrentUser();
-                    startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+
+                    DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
+                    firebaseDatabase.child("Users").child(UserInfo.fUser.getUid()).child("Role").get().addOnCompleteListener(task2 -> {
+                        if (!task2.isSuccessful()) {
+                            System.out.println(task2.getException());
+                            return;
+                        }
+
+                        if (task2.getResult().getValue().equals("Admin")) {
+                            startActivity(new Intent(this, AdminMenuActivity.class));
+                        } else if (task2.getResult().getValue().equals("Moderator")) {
+                            startActivity(new Intent(this, ModeratorMenuActivity.class));
+                        } else {
+                            startActivity(new Intent(this, UserMenuActivity.class));
+                        }
+                    });
                 } else {
                     Toast.makeText(getApplicationContext(), "Неверный логин или пароль", Toast.LENGTH_SHORT).show();
                     Log.d("signin", "signInWithEmail:failure", task.getException());

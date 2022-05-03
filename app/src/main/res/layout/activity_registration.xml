@@ -20,6 +20,7 @@
       app:layout_constraintTop_toTopOf="parent" />
 
   <EditText
+      android:text="wqffwqqwfq"
       android:id="@+id/a_reg_firstName"
       android:layout_width="234dp"
       android:layout_height="44dp"
@@ -33,6 +34,7 @@
       tools:ignore="TouchTargetSizeCheck" />
 
   <EditText
+      android:text="wqffwqqwfq"
       android:id="@+id/a_reg_secondName"
       android:layout_width="234dp"
       android:layout_height="44dp"
@@ -46,6 +48,7 @@
       tools:ignore="TouchTargetSizeCheck" />
 
   <EditText
+      android:text="wqffwqqwfq"
       android:id="@+id/a_reg_lastName"
       android:layout_width="234dp"
       android:layout_height="48dp"
@@ -58,6 +61,7 @@
       app:layout_constraintTop_toBottomOf="@+id/a_reg_secondName" />
 
   <EditText
+      android:text="a@gmail.com"
       android:id="@+id/a_reg_login"
       android:layout_width="234dp"
       android:layout_height="44dp"
@@ -71,6 +75,7 @@
       tools:ignore="TouchTargetSizeCheck" />
 
   <EditText
+      android:text="123123"
       android:id="@+id/a_reg_password"
       android:layout_width="234dp"
       android:layout_height="44dp"

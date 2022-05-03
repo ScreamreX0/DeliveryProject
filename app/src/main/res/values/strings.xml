@@ -8,4 +8,7 @@
     <string name="firstName">Фамилия</string>
     <string name="Name">Имя</string>
     <string name="lastName">Отчество</string>
+    <string name="Shops">Магазины</string>
+    <string name="Restaurants">Рестораны</string>
+    <string name="Cart">Корзина</string>
 </resources>
