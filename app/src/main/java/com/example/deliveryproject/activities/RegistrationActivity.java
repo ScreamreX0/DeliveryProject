@@ -76,6 +76,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     HashMap<String, String> map = new HashMap<>();
                     map.put("Role", "Client");
                     map.put("Shop", "");
+                    map.put("History", "");
                     usersDbRef.child(user.getUid()).setValue(map);
 
                     DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();

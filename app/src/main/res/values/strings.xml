@@ -11,4 +11,8 @@
     <string name="Shops">Магазины</string>
     <string name="Restaurants">Рестораны</string>
     <string name="Cart">Корзина</string>
+    <string name="Search">Поиск</string>
+    <string name="Profile">Профиль</string>
+    <string name="buy">Оформить заказ</string>
+    <string name="total_sum">Итог:</string>
 </resources>
