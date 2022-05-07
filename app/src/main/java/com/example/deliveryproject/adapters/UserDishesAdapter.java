@@ -104,13 +104,13 @@ public class UserDishesAdapter extends RecyclerView.Adapter<UserDishesAdapter.Di
 
         private String getPrice(String price, int count) {
             if (count <= 0) {
-                return price;
+                return price + " руб.";
             }
 
             if (count >= 99) {
-                return price + " x99";
+                return price + "руб. x99";
             }
-            return price + " x" + count;
+            return price + "руб. x" + count;
         }
 
         private int getCount(int count) {

@@ -15,4 +15,7 @@
     <string name="Profile">Профиль</string>
     <string name="buy">Оформить заказ</string>
     <string name="total_sum">Итог:</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="new_address">Новый адрес</string>
+    <string name="address">Адрес</string>
 </resources>

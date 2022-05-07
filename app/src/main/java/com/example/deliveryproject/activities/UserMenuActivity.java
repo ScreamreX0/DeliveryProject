@@ -1,6 +1,5 @@
 package com.example.deliveryproject.activities;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -8,16 +7,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.example.deliveryproject.Items;
 import com.example.deliveryproject.R;
-import com.example.deliveryproject.UserInfo;
 import com.example.deliveryproject.fragments.UserCartFragment;
 import com.example.deliveryproject.fragments.UserEmptyCartFragment;
+import com.example.deliveryproject.fragments.UserProfileFragment;
 import com.example.deliveryproject.fragments.UserRestaurantsFragment;
 import com.example.deliveryproject.fragments.UserShopsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -26,9 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class UserMenuActivity extends AppCompatActivity {
 
@@ -48,8 +41,9 @@ public class UserMenuActivity extends AppCompatActivity {
                 openRests();
             } else if (item.getItemId() == R.id.bottom_cart) {
                 openCart();
+            } else if (item.getItemId() == R.id.bottom_account) {
+                openProfile();
             }
-
             return true;
         });
     }
@@ -59,6 +53,10 @@ public class UserMenuActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.a_user_fragment, fragment);
         fragmentTransaction.commit();
+    }
+
+    private void openProfile() {
+        replaceFragment(new UserProfileFragment(getSupportFragmentManager()));
     }
 
     private void openShops() {
@@ -93,9 +91,9 @@ public class UserMenuActivity extends AppCompatActivity {
 
     private void openCart() {
         replaceFragment(new UserCartFragment(
-                getApplicationContext().getSharedPreferences("Cart", Context.MODE_PRIVATE),
-                getSupportFragmentManager(),
-                new UserEmptyCartFragment()
+            getApplicationContext().getSharedPreferences("Cart", Context.MODE_PRIVATE),
+            getSupportFragmentManager(),
+            new UserEmptyCartFragment()
         ));
     }
 }

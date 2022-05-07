@@ -2,8 +2,6 @@ package com.example.deliveryproject;
 
 import com.google.firebase.database.DataSnapshot;
 
-import java.util.ArrayList;
-
 public class Items {
     public interface IListItems {
     }
@@ -87,6 +85,22 @@ public class Items {
 
         public void setPrice(String price) {
             this.price = price;
+        }
+    }
+
+    public static class Setting {
+        String label;
+
+        public Setting(String label) {
+            this.label = label;
+        }
+
+        public String getLabel() {
+            return label;
+        }
+
+        public void setLabel(String label) {
+            this.label = label;
         }
     }
 }

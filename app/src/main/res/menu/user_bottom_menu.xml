@@ -16,12 +16,12 @@
         android:icon="@drawable/ic_baseline_shopping_cart_24">
     </item>
 
-    <item android:id="@+id/top_search"
+    <item android:id="@+id/bottom_search"
         android:title="@string/Search"
         android:icon="@drawable/ic_baseline_search_24">
     </item>
 
-    <item android:id="@+id/top_account"
+    <item android:id="@+id/bottom_account"
         android:title="@string/Profile"
         android:icon="@drawable/ic_baseline_account_box_24"
         />

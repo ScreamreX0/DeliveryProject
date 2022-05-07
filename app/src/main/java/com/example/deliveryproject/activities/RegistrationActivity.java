@@ -35,14 +35,14 @@ public class RegistrationActivity extends AppCompatActivity {
         findViewById(R.id.a_reg_b_registration).setOnClickListener(view -> {
             String firstName = ((EditText) findViewById(R.id.a_reg_firstName)).getText().toString();
             String secondName = ((EditText) findViewById(R.id.a_reg_secondName)).getText().toString();
-            String lastName = ((EditText) findViewById(R.id.a_reg_lastName)).getText().toString();
             String login = ((EditText) findViewById(R.id.a_reg_login)).getText().toString();
             String password = ((EditText) findViewById(R.id.a_reg_password)).getText().toString();
+            String address = ((EditText) findViewById(R.id.a_reg_address)).getText().toString();
 
-            String answer = checkForARegistraion(firstName, secondName, lastName, login, password);
+            String answer = checkForARegistraion(firstName, secondName, login, password, address);
 
             if (!answer.equals("ok")) {
-                Toast.makeText(this, answer, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), answer, Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -57,7 +57,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 // Добавляем пользователю имя, фамилию, отчество
                 FirebaseUser user = mAuth.getCurrentUser();
                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                        .setDisplayName(firstName + " " + secondName + " " + lastName)
+                        .setDisplayName(firstName + " " + secondName)
                         .build();
 
                 assert user != null;
@@ -77,6 +77,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     map.put("Role", "Client");
                     map.put("Shop", "");
                     map.put("History", "");
+                    map.put("Address", address);
                     usersDbRef.child(user.getUid()).setValue(map);
 
                     DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
@@ -109,13 +110,13 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private String checkForARegistraion(String firstName,
                                         String secondName,
-                                        String lastName,
                                         String login,
-                                        String password) {
+                                        String password,
+                                        String address) {
         if (firstName.length() == 0
                 || secondName.length() == 0
-                || lastName.length() == 0
                 || login.length() == 0
+                || address.length() == 0
                 || password.length() == 0) {
             return "Заполните все поля";
         }
