@@ -19,6 +19,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.deliveryproject.R;
+import com.example.deliveryproject.fragments.ModerEditPriceFragment;
+import com.example.deliveryproject.fragments.OrderingFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -57,20 +59,15 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.CartIt
         public CartItem(@NonNull View itemView) {
             super(itemView);
 
+            // Слушатель кнопки подтверждения покупки
             view.findViewById(R.id.f_cart_confirm).setOnClickListener(v -> {
-                insertToHistory();
-
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.clear();
-                editor.apply();
-
-                notifyItemRangeRemoved(0, getItemCount());
-
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.a_user_fragment, fragment);
-                fragmentTransaction.commit();
+                OrderingFragment orderingFragment = new OrderingFragment(
+                        preferences,
+                        UserCartAdapter.this,
+                        fragment,
+                        fragmentManager);
+                orderingFragment.show(fragmentManager, "");
             });
-
 
             if (!(preferences.getAll().size() == 0)) {
                 image = itemView.findViewById(R.id.i_cart_image);
@@ -78,6 +75,7 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.CartIt
                 price = itemView.findViewById(R.id.i_cart_price);
                 count = itemView.findViewById(R.id.i_cart_count);
                 deleteBucket = itemView.findViewById(R.id.i_cart_delete_bucket);
+                shopName = itemView.findViewById(R.id.i_cart_shop);
             }
         }
 
@@ -86,33 +84,40 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.CartIt
         TextView price;
         TextView count;
         ImageView deleteBucket;
+        TextView shopName;
 
         @SuppressLint("SetTextI18n")
-        void bind(String image, String name, String price, String count) {
-            if (!(preferences.getAll().size() == 0)) {
-                this.name.setText(name);
-                this.price.setText(price);
-                this.count.setText(count);
-                setImage(this.image, image);
-
-                deleteBucket.setOnClickListener(view -> {
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.remove(name);
-                    editor.apply();
-
-                    notifyItemRemoved(getAdapterPosition());
-
-                    if (preferences.getAll().size() == 0) {
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.a_user_fragment, fragment);
-                        fragmentTransaction.commit();
-                    } else {
-                        ((TextView)parent.findViewById(R.id.f_cart_total_sum)).setText(String.valueOf(getTotalSum()) + " руб.");
-                    }
-                });
+        void bind(String image, String name, String price, String count, String shopName) {
+            // Проверка на размер корзины
+            if ((preferences.getAll().size() == 0)) {
+                return;
             }
+
+            this.name.setText(name);
+            this.price.setText(price);
+            this.count.setText(count);
+            this.shopName.setText(shopName);
+            setImage(this.image, image);
+
+            // Слушатель кнопки удаления из корзины
+            deleteBucket.setOnClickListener(view -> {
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.remove(name);
+                editor.apply();
+
+                notifyItemRemoved(getAdapterPosition());
+
+                if (preferences.getAll().size() == 0) {
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.a_user_fragment, fragment);
+                    fragmentTransaction.commit();
+                } else {
+                    ((TextView)parent.findViewById(R.id.f_cart_total_sum)).setText(String.valueOf(getTotalSum()) + " руб.");
+                }
+            });
         }
 
+        // Метод для установки изображения
         private void setImage(ImageView imageView, String photoName) {
             if (photoName.equals("")) {
                 return;
@@ -122,7 +127,7 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.CartIt
             StorageReference imageRef = firebaseStorage.getReference()
                     .child(photoName + ".jpg");
 
-            imageRef.getBytes(1024 * 1024)
+            imageRef.getBytes(256 * 256)
                     .addOnSuccessListener(bytes -> {
                         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                         imageView.setImageBitmap(bitmap);
@@ -145,7 +150,8 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.CartIt
         holder.bind(values.get(position).split(";")[0],
                 keys.get(position),
                 values.get(position).split(";")[1] + " руб.",
-                values.get(position).split(";")[2] + " шт.");
+                values.get(position).split(";")[2] + " шт.",
+                values.get(position).split(";")[3]);
     }
 
     @Override
@@ -153,6 +159,7 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.CartIt
         return preferences.getAll().size();
     }
 
+    // Метод для получения общей суммы в корзине
     private float getTotalSum() {
         float sum = 0;
 
@@ -161,31 +168,5 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.CartIt
         }
 
         return sum;
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    private void insertToHistory() {
-        List<String> keys = new ArrayList<>(preferences.getAll().keySet());
-        List<String> values = new ArrayList<String>((Collection<? extends String>) preferences.getAll().values());
-
-        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-
-        HashMap<String, Object> historyMap = new HashMap<>();
-        historyMap.put("Date", new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()));
-
-        HashMap<String, HashMap<String, String>> productsMap = new HashMap<>();
-        for (int i = 0; i < keys.size(); i++) {
-            HashMap<String, String> productMap = new HashMap<>();
-            productMap.put("Name", keys.get(i));
-            productMap.put("Photo path", values.get(i).split(";")[0]);
-            productMap.put("Price", values.get(i).split(";")[1]);
-            productMap.put("Count", values.get(i).split(";")[2]);
-
-            productsMap.put("Product" + i, productMap);
-        }
-        historyMap.put("Products", productsMap);
-
-        firebaseDatabase.child("Users").child(firebaseAuth.getUid()).child("History").push().setValue(historyMap);
     }
 }

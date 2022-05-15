@@ -8,10 +8,13 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.deliveryproject.Items;
 import com.example.deliveryproject.R;
+import com.example.deliveryproject.adapters.AdminShopsAdapter;
 import com.example.deliveryproject.adapters.UserRestaurantsAdapter;
 import com.example.deliveryproject.adapters.UserShopsAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +31,7 @@ import java.util.List;
 
 public class UserShopsFragment extends Fragment {
     ArrayList<DataSnapshot> items;
+    UserShopsAdapter adapter;
 
     public UserShopsFragment(List<DataSnapshot> items) {
         this.items = (ArrayList<DataSnapshot>) items;
@@ -39,7 +43,23 @@ public class UserShopsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_shops, container, false);
 
         ListView listView = view.findViewById(R.id.f_shops_scroll_view);
-        listView.setAdapter(new UserRestaurantsAdapter(getContext(), items.toArray()));
+        this.adapter = new UserShopsAdapter(getContext(), items.toArray());
+        listView.setAdapter(this.adapter);
+
+        SearchView searchView = view.findViewById(R.id.f_shops_search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                UserShopsFragment.this.adapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                UserShopsFragment.this.adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
         return view;
     }

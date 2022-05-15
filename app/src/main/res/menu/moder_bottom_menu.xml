@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/moder_bottom_positions"
+        android:title="@string/Positions"
+        android:icon="@drawable/ic_baseline_shopping_bag_24">
+    </item>
+
+    <item android:id="@+id/moder_bottom_account"
+        android:title="@string/Profile"
+        android:icon="@drawable/ic_baseline_account_box_24"
+        />
+</menu>

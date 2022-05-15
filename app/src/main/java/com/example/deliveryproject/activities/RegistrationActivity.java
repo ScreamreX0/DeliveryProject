@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class RegistrationActivity extends AppCompatActivity {
-
     private FirebaseAuth mAuth;
 
     @Override
@@ -32,66 +31,85 @@ public class RegistrationActivity extends AppCompatActivity {
 
         init();
 
+        // Слушатель на кнопку регистрации
         findViewById(R.id.a_reg_b_registration).setOnClickListener(view -> {
+            // Инициализация всех полей
             String firstName = ((EditText) findViewById(R.id.a_reg_firstName)).getText().toString();
             String secondName = ((EditText) findViewById(R.id.a_reg_secondName)).getText().toString();
             String login = ((EditText) findViewById(R.id.a_reg_login)).getText().toString();
             String password = ((EditText) findViewById(R.id.a_reg_password)).getText().toString();
             String address = ((EditText) findViewById(R.id.a_reg_address)).getText().toString();
 
+            // Вызов метода проверки полей и получение ответа
             String answer = checkForARegistraion(firstName, secondName, login, password, address);
 
             if (!answer.equals("ok")) {
+                // Ошибка в форматировании. Вывод ошибки пользователю
                 Toast.makeText(getApplicationContext(), answer, Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Создаем пользователя
+            // Создание пользователя в базе данных
             mAuth.createUserWithEmailAndPassword(login, password).addOnCompleteListener(this, task -> {
+                // Проверка на существующего пользователя
                 if (!task.isSuccessful()) {
-                    Log.d("signup", "createUserWithEmail:failure", task.getException());
+                    Toast.makeText(getApplicationContext(), "Такой пользователь уже существует", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Log.d("signup", "createUserWithEmail:success");
 
-                // Добавляем пользователю имя, фамилию, отчество
+                // Добавление пользователю ФИО
                 FirebaseUser user = mAuth.getCurrentUser();
                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                         .setDisplayName(firstName + " " + secondName)
                         .build();
 
+                // Проверка, что пользователь найден. В противном случае вывод ошибки
                 assert user != null;
+
+                // Обновляем профиль только что созданного пользователя и слушаем ответ от базы
                 user.updateProfile(profileUpdates).addOnCompleteListener(task1 -> {
                     if (!task1.isSuccessful()) {
-                        Log.d("signup", "updateProfile:failure");
+                        // Не удалось обновить профиль пользователя
+                        Toast.makeText(getApplicationContext(), "Не удалось добавить ФИО пользователю", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                    Log.d("signup", "updateProfile:success");
                     UserInfo.fUser = user;
 
-                    // Добавляем пользователю роль
+                    // Получение ссылки на всех пользователей из базы
                     DatabaseReference usersDbRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
+                    // Создание коллекции ключ-значение пользователя
                     HashMap<String, String> map = new HashMap<>();
                     map.put("Role", "Client");
-                    map.put("Shop", "");
+                    map.put("Cart", "");
                     map.put("History", "");
                     map.put("Address", address);
+                    map.put("PrivilegedSettings", "");
+
+                    // Установка значений пользователю
                     usersDbRef.child(user.getUid()).setValue(map);
 
+                    // Получение ссылки базы данных
                     DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
+
+                    // Получению роли пользователя. Слушатель ответа от базы
                     firebaseDatabase.child("Users").child(UserInfo.fUser.getUid()).child("Role").get().addOnCompleteListener(task2 -> {
                         if (!task2.isSuccessful()) {
-                            System.out.println(task2.getException());
+                            // Не удалось получить роль пользователя
+                            Toast.makeText(getApplicationContext(), "Не удалось получить роль пользователя", Toast.LENGTH_SHORT).show();
                             return;
                         }
 
+                        // Проверка на роли
                         if (task2.getResult().getValue().equals("Admin")) {
+                            // Запуск окна админа
                             startActivity(new Intent(this, AdminMenuActivity.class));
                         } else if (task2.getResult().getValue().equals("Moderator")) {
+                            // Запуск окна модератора
                             startActivity(new Intent(this, ModeratorMenuActivity.class));
                         } else {
+                            // ЗАпуск окна пользователя
                             startActivity(new Intent(this, UserMenuActivity.class));
                         }
                     });
@@ -99,20 +117,23 @@ public class RegistrationActivity extends AppCompatActivity {
             });
         });
 
+        // Слушатель на кнопку авторизации
         findViewById(R.id.a_reg_tv_auth).setOnClickListener(view -> {
+            // Открытие окна авторизации
             startActivity(new Intent(this, AuthActivity.class));
         });
     }
 
     private void init() {
+        // Получение базы данных
         mAuth = FirebaseAuth.getInstance();
     }
 
-    private String checkForARegistraion(String firstName,
-                                        String secondName,
-                                        String login,
-                                        String password,
+    // Метод для проверки правильности ввода в поля
+    private String checkForARegistraion(String firstName, String secondName,
+                                        String login, String password,
                                         String address) {
+        // Проверка на пустоту полей
         if (firstName.length() == 0
                 || secondName.length() == 0
                 || login.length() == 0

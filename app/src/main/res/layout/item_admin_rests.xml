@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="350dp">
+
+    <ImageView
+        android:id="@+id/i_admin_rests_icon"
+        android:layout_width="360dp"
+        android:layout_height="188dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        style="@style/RoundedImageView"
+        android:src="@drawable/ic_baseline_image_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/i_admin_rests_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="52dp"
+        android:text="Ресторан"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/i_admin_rests_icon" />
+
+    <TextView
+        android:id="@+id/i_admin_rests_isClosed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Закрыто"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/i_admin_rests_isOpen"
+        app:layout_constraintTop_toBottomOf="@+id/i_admin_rests_isOpen" />
+
+    <TextView
+        android:id="@+id/i_admin_rests_isOpen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="104dp"
+        android:text="Открыто"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/i_admin_rests_icon" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="30dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toEndOf="@+id/i_admin_rests_isOpen"
+        app:layout_constraintTop_toTopOf="@+id/i_admin_rests_isOpen">
+
+        <RadioButton
+            android:id="@+id/i_admin_rests_open"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <RadioButton
+            android:id="@+id/i_admin_rests_closed"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            tools:ignore="TouchTargetSizeCheck" />
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

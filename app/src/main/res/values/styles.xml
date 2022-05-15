@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DefaultButton">
+        <item name="android:radius">8dp</item>
+        <item name="textFillColor">@color/white</item>
+        <item name="backgroundTint">@color/middle_violet</item>
+    </style>
+
+    <style name="DefaultDialogTitle">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RoundedImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeTopRight">20dp</item>
+
+    </style>
+
+</resources>

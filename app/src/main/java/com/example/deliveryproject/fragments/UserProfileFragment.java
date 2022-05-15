@@ -60,6 +60,7 @@ public class UserProfileFragment extends Fragment {
 
         ListView listView = view.findViewById(R.id.f_profile_settings_list);
         listView.setAdapter(new UserSettingsAdapter(container.getContext(), 0, new Items.Setting[] {
+                new Items.Setting("История заказов"),
                 new Items.Setting("Изменить адрес"),
                 new Items.Setting("Изменить имя"),
                 new Items.Setting("Изменить пароль")

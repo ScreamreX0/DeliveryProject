@@ -18,4 +18,6 @@
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="new_address">Новый адрес</string>
     <string name="address">Адрес</string>
+    <string name="ok">Ok</string>
+    <string name="Positions">Позиции</string>
 </resources>

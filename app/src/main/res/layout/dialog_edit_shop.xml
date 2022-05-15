@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="200dp">
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="300dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Переименовать магазин"
+        android:textStyle="bold"
+        android:gravity="center"
+        style="@style/DefaultDialogTitle"
+        app:layout_constraintHorizontal_bias="0.302"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/d_edit_shop_cancel"
+        android:layout_width="108dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="28dp"
+        style="@style/DefaultButton"
+        android:text="Отмена"
+        app:layout_constraintStart_toEndOf="@+id/d_edit_shop_ok"
+        app:layout_constraintTop_toBottomOf="@+id/d_edit_shop_edit" />
+
+    <Button
+        android:id="@+id/d_edit_shop_ok"
+        android:layout_width="109dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/ok"
+        style="@style/DefaultButton"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/d_edit_shop_edit" />
+
+    <EditText
+        android:id="@+id/d_edit_shop_edit"
+        android:layout_width="249dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/grey_rect"
+        android:ems="10"
+        android:hint="Новое название"
+        android:inputType="textPersonName"
+        android:paddingStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

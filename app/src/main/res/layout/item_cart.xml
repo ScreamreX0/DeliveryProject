@@ -7,6 +7,16 @@
     android:paddingTop="10dp">
 
 
+    <TextView
+        android:id="@+id/i_cart_shop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="Название магазина"
+        app:layout_constraintStart_toEndOf="@+id/i_cart_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/i_cart_image"
         android:layout_width="102dp"
@@ -22,37 +32,44 @@
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
+        android:text="Название продукта"
+        app:layout_constraintEnd_toStartOf="@+id/i_cart_price"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/i_cart_image"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/i_cart_shop" />
 
     <TextView
         android:id="@+id/i_cart_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintStart_toEndOf="@+id/i_cart_name"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="28dp"
+        android:text="Цена продукта"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/i_cart_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintStart_toEndOf="@+id/i_cart_name"
-        app:layout_constraintTop_toBottomOf="@+id/i_cart_price" />
+        android:layout_marginTop="87dp"
+        android:layout_marginEnd="36dp"
+        android:text="Кол-во"
+        app:layout_constraintEnd_toStartOf="@+id/i_cart_delete_bucket"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/i_cart_delete_bucket"
         android:layout_width="31dp"
         android:layout_height="29dp"
-        android:layout_marginTop="84dp"
         android:layout_marginEnd="28dp"
+        android:layout_marginBottom="27dp"
         android:background="@drawable/ic_baseline_delete_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

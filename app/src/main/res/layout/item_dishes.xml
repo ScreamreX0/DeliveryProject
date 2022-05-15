@@ -22,6 +22,7 @@
             android:layout_height="130dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            style="@style/RoundedImageView"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_food_bank_24" />
 
@@ -37,8 +38,8 @@
 
         <ImageView
             android:id="@+id/i_dishes_button"
-            android:layout_width="140dp"
-            android:layout_height="27dp"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
             android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,20 +48,21 @@
 
         <TextView
             android:id="@+id/i_dishes_price"
-            android:layout_width="73dp"
-            android:layout_height="30dp"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
+            android:autoSizeTextType="uniform"
             android:gravity="center"
             android:text="0"
             app:layout_constraintEnd_toStartOf="@+id/i_dishes_plus"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/i_dishes_minus"
             app:layout_constraintTop_toTopOf="@+id/i_dishes_button" />
 
         <TextView
             android:id="@+id/i_dishes_minus"
             android:layout_width="33dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="0dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="-"
             app:layout_constraintStart_toStartOf="@+id/i_dishes_button"
@@ -69,11 +71,11 @@
         <TextView
             android:id="@+id/i_dishes_plus"
             android:layout_width="34dp"
-            android:layout_height="29dp"
-            android:layout_marginEnd="0dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
+
             android:gravity="center"
             android:text="+"
-
             app:layout_constraintEnd_toEndOf="@+id/i_dishes_button"
             app:layout_constraintTop_toTopOf="@+id/i_dishes_button" />
 
