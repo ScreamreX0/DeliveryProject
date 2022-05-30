@@ -37,7 +37,7 @@
         android:layout_width="208dp"
         android:layout_height="50dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:autoSizeTextType="uniform"
         android:gravity="top"
         android:text="Имя пользователя"
@@ -58,4 +58,25 @@
         app:layout_constraintVertical_bias="0.100000024">
 
     </ListView>
+
+    <TextView
+        android:id="@+id/f_profile_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="8dp"
+        android:text="..."
+        app:layout_constraintBottom_toTopOf="@+id/f_profile_full_name"
+        app:layout_constraintStart_toEndOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/f_profile_replenish"
+        style="@style/DefaultButton"
+        android:layout_width="116dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="4dp"
+        android:text="Пополнить"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toTopOf="@+id/f_profile_full_name"
+        app:layout_constraintEnd_toEndOf="@+id/f_profile_full_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

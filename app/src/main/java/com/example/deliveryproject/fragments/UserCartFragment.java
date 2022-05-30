@@ -65,12 +65,19 @@ public class UserCartFragment extends Fragment {
         }
 
         try {
-            ((TextView)view.findViewById(R.id.f_cart_total_sum)).setText(String.valueOf(getTotalSum()) + " руб.");
-        } catch (NullPointerException npe) {
+            ((TextView)view.findViewById(R.id.f_cart_total_sum)).setText(getTotalSum() + " руб.");
+        } catch (Exception npe) {
 
         }
 
-        UserCartAdapter adapter = new UserCartAdapter(preferences, container, view, fragmentManager, fragment);
+        UserCartAdapter adapter = new UserCartAdapter(
+                getContext(),
+                preferences,
+                container,
+                view,
+                fragmentManager,
+                fragment);
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         RecyclerView recyclerView = view.findViewById(R.id.f_cart_recycle_view);
 

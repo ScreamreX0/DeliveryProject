@@ -18,42 +18,49 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}" />
-
         <activity
             android:name=".activities.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
+            android:name=".activities.UserOrderingActivity"
+            android:exported="false"
+            android:parentActivityName=".activities.UserMenuActivity"/>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+
+        <activity
             android:name=".activities.ModeratorMenuActivity"
             android:exported="false"
-            android:parentActivityName=".activities.ModeratorMenuActivity"/>
+            android:parentActivityName=".activities.ModeratorMenuActivity" />
+
         <activity
             android:name=".activities.AdminMenuActivity"
             android:exported="false"
-            android:parentActivityName=".activities.AdminMenuActivity"/>
+            android:parentActivityName=".activities.AdminMenuActivity" />
+
         <activity
             android:name=".activities.RegistrationActivity"
             android:exported="false"
-            android:parentActivityName=".activities.AuthActivity"/>
+            android:parentActivityName=".activities.AuthActivity" />
+
         <activity
             android:name=".activities.UserMenuActivity"
             android:exported="false"
-            android:parentActivityName=".activities.UserMenuActivity"/>
+            android:parentActivityName=".activities.UserMenuActivity" />
+
         <activity
             android:name=".activities.AuthActivity"
             android:exported="false"
-            android:parentActivityName=".activities.AuthActivity"/>
-        <activity
-            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat" />
+            android:parentActivityName=".activities.AuthActivity" />
     </application>
 
 </manifest>

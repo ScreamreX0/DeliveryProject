@@ -1,6 +1,8 @@
 package com.example.deliveryproject.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,8 +21,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.deliveryproject.R;
+import com.example.deliveryproject.activities.UserOrderingActivity;
 import com.example.deliveryproject.fragments.ModerEditPriceFragment;
-import com.example.deliveryproject.fragments.OrderingFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -38,7 +40,22 @@ import java.util.Map;
 import java.util.zip.Inflater;
 
 public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.CartItem> {
-    public UserCartAdapter(SharedPreferences preferences, ViewGroup parent, View view, FragmentManager fragmentManager, Fragment fragment) {
+    FragmentManager fragmentManager;
+    Fragment fragment;
+    Context context;
+
+    SharedPreferences preferences;
+    Map<String, ?> map;
+    View parent;
+    View view;
+
+    public UserCartAdapter(Context context,
+                           SharedPreferences preferences,
+                           ViewGroup parent,
+                           View view,
+                           FragmentManager fragmentManager,
+                           Fragment fragment) {
+        this.context = context;
         this.fragmentManager = fragmentManager;
         this.fragment = fragment;
         this.preferences = preferences;
@@ -47,26 +64,15 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.CartIt
         this.view = view;
     }
 
-    FragmentManager fragmentManager;
-    Fragment fragment;
-
-    SharedPreferences preferences;
-    Map<String, ?> map;
-    View parent;
-    View view;
-
     class CartItem extends RecyclerView.ViewHolder {
         public CartItem(@NonNull View itemView) {
             super(itemView);
 
             // Слушатель кнопки подтверждения покупки
             view.findViewById(R.id.f_cart_confirm).setOnClickListener(v -> {
-                OrderingFragment orderingFragment = new OrderingFragment(
-                        preferences,
-                        UserCartAdapter.this,
-                        fragment,
-                        fragmentManager);
-                orderingFragment.show(fragmentManager, "");
+                Intent intent = new Intent(context, UserOrderingActivity.class);
+                intent.putExtra("TotalSum", getTotalSum());
+                context.startActivity(intent);
             });
 
             if (!(preferences.getAll().size() == 0)) {
@@ -145,7 +151,7 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.CartIt
     @Override
     public void onBindViewHolder(@NonNull CartItem holder, int position) {
         List<String> keys = new ArrayList<>(map.keySet());
-        List<String> values = new ArrayList<String>((Collection<? extends String>) map.values());
+        List<String> values = new ArrayList<>((Collection<? extends String>) map.values());
 
         holder.bind(values.get(position).split(";")[0],
                 keys.get(position),

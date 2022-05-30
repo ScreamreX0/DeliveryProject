@@ -22,14 +22,17 @@ import com.example.deliveryproject.adapters.UserSettingsAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
 public class UserProfileFragment extends Fragment {
     FragmentManager fragmentManager;
+    FirebaseDatabase firebaseDatabase;
 
     public UserProfileFragment(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
+        this.firebaseDatabase = FirebaseDatabase.getInstance();
     }
     @Nullable
     @Override
@@ -64,6 +67,17 @@ public class UserProfileFragment extends Fragment {
                 new Items.Setting("Изменить адрес"),
                 new Items.Setting("Выход")
         }, fragmentManager));
+
+        // Установка баланса
+        firebaseDatabase.getReference("Users").child(FirebaseAuth.getInstance().getUid())
+                .child("Balance").get().addOnSuccessListener(runnable -> {
+                    ((TextView)view.findViewById(R.id.f_profile_balance)).setText(
+                            runnable.getValue().toString() + " руб.");
+                });
+
+        view.findViewById(R.id.f_profile_replenish).setOnClickListener(view1 -> {
+            new UserReplenishBalance().show(fragmentManager, "");
+        });
 
         return view;
     }

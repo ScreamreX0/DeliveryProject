@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.UserOrderingActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/middle_violet"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/a_user_ordering_tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="Доставка"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:autoSizeTextType="uniform"
+        android:text="Альметьевск, улица 8 Марта, 31"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/a_user_ordering_entrance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <EditText
+        android:id="@+id/a_user_ordering_entrance"
+        android:layout_width="163dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/grey_rect"
+        android:ems="10"
+        android:hint="Подъезд"
+        android:maxLines="1"
+        android:maxLength="4"
+        android:inputType="number"
+        android:paddingStart="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/a_user_ordering_flat"
+        app:layout_constraintStart_toStartOf="@+id/a_user_ordering_confirm" />
+
+    <EditText
+        android:id="@+id/a_user_ordering_intercom"
+        android:layout_width="163dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/grey_rect"
+        android:ems="10"
+        android:maxLines="1"
+        android:hint="Домофон"
+        android:maxLength="10"
+        android:inputType="textPersonName"
+        android:paddingStart="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/a_user_ordering_floor"
+        app:layout_constraintStart_toEndOf="@+id/a_user_ordering_entrance" />
+
+    <EditText
+        android:id="@+id/a_user_ordering_flat"
+        android:layout_width="163dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/grey_rect"
+        android:ems="10"
+        android:hint="Кв./Офис"
+        android:maxLines="1"
+        android:maxLength="5"
+        android:inputType="number"
+        android:paddingStart="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/a_user_ordering_comment"
+        app:layout_constraintStart_toStartOf="@+id/a_user_ordering_confirm" />
+
+    <EditText
+        android:id="@+id/a_user_ordering_floor"
+        android:layout_width="163dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/grey_rect"
+        android:ems="10"
+        android:hint="Этаж"
+        android:maxLines="1"
+        android:maxLength="3"
+        android:inputType="number"
+        android:paddingStart="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/a_user_ordering_comment"
+        app:layout_constraintStart_toEndOf="@+id/a_user_ordering_flat" />
+
+    <EditText
+        android:id="@+id/a_user_ordering_comment"
+        android:layout_width="346dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/grey_rect"
+        android:ems="10"
+        android:hint="Комментарий"
+        android:inputType="textPersonName"
+        android:paddingStart="10dp"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@+id/a_user_ordering_phone_number"
+        app:layout_constraintStart_toStartOf="@+id/a_user_ordering_confirm" />
+
+    <EditText
+        android:id="@+id/a_user_ordering_phone_number"
+        android:layout_width="346dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/grey_rect"
+        android:ems="10"
+        android:hint="Телефон"
+        android:inputType="phone"
+        android:paddingStart="10dp"
+        android:maxLines="1"
+        android:maxLength="20"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="@+id/a_user_ordering_confirm" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="21dp"
+        android:text="Стоимость"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView12"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/a_user_ordering_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="20dp"
+        android:text="..."
+        app:layout_constraintBottom_toTopOf="@+id/a_user_ordering_delivery_price"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="29dp"
+        android:text="Доставка"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/a_user_ordering_confirm"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/a_user_ordering_delivery_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="29dp"
+        android:text="Бесплатно"
+        app:layout_constraintBottom_toTopOf="@+id/a_user_ordering_confirm"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/a_user_ordering_confirm"
+        style="@style/DefaultButton"
+        android:layout_width="344dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="24dp"
+        android:text="Заказать"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -85,6 +85,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     map.put("Cart", "");
                     map.put("History", "");
                     map.put("Address", address);
+                    map.put("Balance", "1000");
                     map.put("PrivilegedSettings", "");
 
                     // Установка значений пользователю

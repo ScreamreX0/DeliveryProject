@@ -23,6 +23,7 @@
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/activity_registration.xml" value="0.5" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/activity_splash_screen.xml" value="0.33" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/activity_user_menu.xml" value="0.33" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/activity_user_ordering.xml" value="0.25" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_add_position.xml" value="0.5" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_add_rest.xml" value="0.5" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_add_shop.xml" value="0.5" />
@@ -50,6 +51,7 @@
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_product.xml" value="0.35144927536231885" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_products.xml" value="0.30480072463768115" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_replenish_balance.xml" value="0.33" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_restaurants.xml" value="0.37681159420289856" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_shops.xml" value="0.33" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_user_profile.xml" value="0.35597826086956524" />
