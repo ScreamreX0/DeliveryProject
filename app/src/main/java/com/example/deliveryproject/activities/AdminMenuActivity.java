@@ -17,6 +17,7 @@ import com.example.deliveryproject.R;
 import com.example.deliveryproject.fragments.AdminProfileFragment;
 import com.example.deliveryproject.fragments.AdminRestaurantsFragment;
 import com.example.deliveryproject.fragments.AdminShopsFragment;
+import com.example.deliveryproject.fragments.AdminStatistics;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -49,6 +50,8 @@ public class AdminMenuActivity extends AppCompatActivity {
                 openRests();
             } else if (item.getItemId() == R.id.admin_bottom_account) {
                 openProfile();
+            } else if (item.getItemId() == R.id.admin_bottom_statistics) {
+                openStatistics();
             }
             return true;
         });
@@ -56,6 +59,36 @@ public class AdminMenuActivity extends AppCompatActivity {
 
     // Ссылка на базу данных
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+    private void openStatistics() {
+        // Ссылка на пользователей
+        DatabaseReference usersRef = databaseReference.child("Users");
+
+        // Получаем всех пользователей и "прослушиваем" результат
+        usersRef.get().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                // Соединиться с базой не удалось
+                Toast.makeText(this, "Плохое соединение с базой", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            List<DataSnapshot> arr = new ArrayList<>();
+
+            // Массив пользователей
+            Iterable<DataSnapshot> items = task.getResult().getChildren();
+
+            // Конвертация пользователей из Iterable<DataSnapshot> в List<DataSnapshot>
+            for (DataSnapshot dataSnapshot : items) {
+                arr.add(dataSnapshot);
+            }
+
+            // Запускаем фрагмент статистики
+            replaceFragment(new AdminStatistics(
+                            arr,
+                            getSupportFragmentManager()),
+                    getSupportFragmentManager());
+        });
+    }
 
     public void openShops() {
         // Ссылка на магазины
@@ -133,7 +166,7 @@ public class AdminMenuActivity extends AppCompatActivity {
 
     // Слушатель результатов выбора картинки из галереи
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1 && data != null && data.getData() != null) {
@@ -227,5 +260,10 @@ public class AdminMenuActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

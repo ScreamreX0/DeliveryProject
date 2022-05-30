@@ -23,7 +23,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:paddingBottom="10dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/f_cart_constr_layout"
@@ -49,10 +50,14 @@
 
                 <TextView
                     android:id="@+id/f_cart_total_sum"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="28dp"
+                    android:layout_width="95dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="24dp"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="center"
+                    android:text="0 руб."
+                    app:layout_constraintEnd_toStartOf="@+id/f_cart_confirm"
+                    app:layout_constraintHorizontal_bias="0.411"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>

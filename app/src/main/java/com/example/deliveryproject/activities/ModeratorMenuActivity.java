@@ -18,7 +18,9 @@ import com.example.deliveryproject.R;
 import com.example.deliveryproject.fragments.AdminProfileFragment;
 import com.example.deliveryproject.fragments.AdminShopsFragment;
 import com.example.deliveryproject.fragments.ModerPositionsFragment;
+import com.example.deliveryproject.fragments.ModerProfileFragment;
 import com.example.deliveryproject.fragments.UserProductsFragment;
+import com.example.deliveryproject.fragments.UserProfileFragment;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -220,12 +222,8 @@ public class ModeratorMenuActivity extends AppCompatActivity {
     }
 
     private void openProfile() {
-        // Запускаем фрагмент профиля
-
-        // TODO: Добавить модератора
         replaceFragment(
-                new AdminProfileFragment(getSupportFragmentManager()),
-                getSupportFragmentManager());
+                new ModerProfileFragment(getSupportFragmentManager()), getSupportFragmentManager());
     }
 
     // Метод для запуска фрагментов
@@ -233,5 +231,10 @@ public class ModeratorMenuActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.a_moder_fragment, fragment);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

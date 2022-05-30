@@ -12,41 +12,44 @@
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.186" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/drawable/rounded_grey_rect.xml" value="0.3" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/drawable/white_circle.xml" value="0.30052083333333335" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout-v26/item_admin_rests.xml" value="0.3880208333333333" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/activity_admin_menu.xml" value="0.33" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/activity_auth.xml" value="0.33" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/activity_main.xml" value="0.25769927536231885" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/activity_menu.xml" value="0.28177083333333336" />
-        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/activity_moderator_menu.xml" value="0.15" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/activity_moderator_menu.xml" value="0.33" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/activity_pick_image.xml" value="0.33967391304347827" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/activity_profile.xml" value="0.35597826086956524" />
-        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/activity_registration.xml" value="0.33" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/activity_registration.xml" value="0.5" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/activity_splash_screen.xml" value="0.33" />
-        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/activity_user_menu.xml" value="0.16" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/activity_user_menu.xml" value="0.33" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_add_position.xml" value="0.5" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_add_rest.xml" value="0.5" />
-        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_add_shop.xml" value="0.33106884057971014" />
-        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_change_address.xml" value="0.35597826086956524" />
-        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_change_name.xml" value="0.15" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_add_shop.xml" value="0.5" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_change_address.xml" value="0.67" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_change_name.xml" value="0.18" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_change_password.xml" value="0.2" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_edit_price.xml" value="0.16574074074074074" />
-        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_edit_rest.xml" value="0.33" />
-        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_edit_shop.xml" value="0.33" />
-        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_moder_edit_name.xml" value="0.33" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_edit_rest.xml" value="0.67" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_edit_shop.xml" value="0.67" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_moder_edit_name.xml" value="0.5" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_moder_edit_price.xml" value="0.33" />
-        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_ordering.xml" value="0.33" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/dialog_ordering.xml" value="0.67" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_admin_profile.xml" value="0.25" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_admin_restaurants.xml" value="0.33" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_admin_shops.xml" value="0.1" />
-        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_cart.xml" value="0.2" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_admin_statistics.xml" value="0.45230439442658094" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_cart.xml" value="0.5" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_dishes.xml" value="0.3632246376811594" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_empty.xml" value="0.31447868298860276" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_empty_cart.xml" value="0.3632246376811594" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_history.xml" value="0.2516891891891892" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_map.xml" value="0.284375" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_moder_positions.xml" value="0.3491847826086957" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_moder_profile.xml" value="0.4861111111111111" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_product.xml" value="0.35144927536231885" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_products.xml" value="0.30480072463768115" />
-        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_restaurants.xml" value="0.37681159420289856" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_shops.xml" value="0.33" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/fragment_user_profile.xml" value="0.35597826086956524" />
@@ -57,11 +60,11 @@
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/item_empty_cart.xml" value="0.25" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/item_history.xml" value="0.5" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/item_history_sub.xml" value="0.2516891891891892" />
-        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/item_positions.xml" value="0.5" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/item_positions.xml" value="1.0555555555555556" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/item_products.xml" value="0.67" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/item_rests.xml" value="0.33" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/item_setting.xml" value="0.67" />
-        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/item_shops.xml" value="0.25" />
+        <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/item_shops.xml" value="0.5" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/layout/map_fragment.xml" value="0.35597826086956524" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/menu/admin_bottom_menu.xml" value="0.3880208333333333" />
         <entry key="..\:/Android/projects/DeliveryProject/app/src/main/res/menu/moder_bottom_menu.xml" value="0.3880208333333333" />
@@ -75,5 +78,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="1.0555555555555556" />
+      </ProjectState>
+    </option>
   </component>
 </project>

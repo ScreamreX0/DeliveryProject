@@ -10,6 +10,11 @@
         android:icon="@drawable/ic_baseline_restaurant_24">
     </item>
 
+    <item android:id="@+id/admin_bottom_statistics"
+        android:title="Статистика"
+        android:icon="@drawable/ic_baseline_auto_graph_24">
+    </item>
+
     <item android:id="@+id/admin_bottom_account"
         android:title="@string/Profile"
         android:icon="@drawable/ic_baseline_account_box_24"

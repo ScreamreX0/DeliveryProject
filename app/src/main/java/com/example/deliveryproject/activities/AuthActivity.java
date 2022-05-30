@@ -39,11 +39,14 @@ public class AuthActivity extends AppCompatActivity {
                 return;
             }
 
+            findViewById(R.id.a_auth_b_enter).setEnabled(false);
+            
             // Авторизация с помощью базы данных. Слушатель ответа от базы
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
                 if (!task.isSuccessful()) {
                     // Неверный логин или пароль
                     Toast.makeText(getApplicationContext(), "Неверный логин или пароль", Toast.LENGTH_SHORT).show();
+                    findViewById(R.id.a_auth_b_enter).setEnabled(true);
                     return;
                 }
 

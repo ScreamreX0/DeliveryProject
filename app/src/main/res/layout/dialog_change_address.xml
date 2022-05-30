@@ -35,22 +35,24 @@
 
     <Button
         android:id="@+id/d_change_address_change"
+        style="@style/DefaultButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
         android:layout_marginTop="20dp"
         android:text="Изменить"
-        style="@style/DefaultButton"
-        app:layout_constraintStart_toStartOf="@+id/d_change_address_field"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/d_change_address_field" />
 
     <Button
         android:id="@+id/d_change_address_cancel"
+        style="@style/DefaultButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
         android:text="Отмена"
-        style="@style/DefaultButton"
+        app:layout_constraintEnd_toEndOf="@+id/d_change_address_field"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/d_change_address_change"
         app:layout_constraintTop_toBottomOf="@+id/d_change_address_field" />
 

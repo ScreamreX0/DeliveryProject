@@ -1,6 +1,7 @@
 package com.example.deliveryproject.adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,11 +35,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserSettingsAdapter extends ArrayAdapter<Items.Setting> {
-    public UserSettingsAdapter(@NonNull Context context,
-                               int resource,
-                               @NonNull Items.Setting[] objects,
-                               FragmentManager fragmentManager) {
+public class ModerSettingsAdapter extends ArrayAdapter<Items.Setting> {
+    Items.Setting[] settings;
+    Context context;
+    FragmentManager fragmentManager;
+
+    public ModerSettingsAdapter(@NonNull Context context,
+                                int resource,
+                                @NonNull Items.Setting[] objects,
+                                FragmentManager fragmentManager) {
         super(context, resource, objects);
 
         this.settings = objects;
@@ -46,10 +51,7 @@ public class UserSettingsAdapter extends ArrayAdapter<Items.Setting> {
         this.fragmentManager = fragmentManager;
     }
 
-    Items.Setting[] settings;
-    Context context;
-    FragmentManager fragmentManager;
-
+    // Метод для получения представления
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -60,11 +62,7 @@ public class UserSettingsAdapter extends ArrayAdapter<Items.Setting> {
 
         name.setText(settings[position].getLabel());
 
-        if (settings[position].getLabel().equals("История заказов")) {
-            row.setOnClickListener(view -> {
-                showHistory();
-            });
-        }
+        // Слушатели на настройки
         if (settings[position].getLabel().equals("Изменить адрес")) {
             row.setOnClickListener(view -> {
                 changeAddress();
@@ -79,41 +77,9 @@ public class UserSettingsAdapter extends ArrayAdapter<Items.Setting> {
         return row;
     }
 
-    // Метод для открытия окна с историей покупок
-    private void showHistory() {
-        String firebaseAuth = FirebaseAuth.getInstance().getUid();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference historyRef = databaseReference
-                .child("Users")
-                .child(firebaseAuth)
-                .child("History");
-
-        historyRef.get().addOnCompleteListener(task -> {
-            List<DataSnapshot> arr = new ArrayList<>();
-            Iterable<DataSnapshot> items = task.getResult().getChildren();
-
-            for (DataSnapshot dataSnapshot : items) {
-                arr.add(dataSnapshot);
-            }
-
-            FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.a_user_fragment, new UserHistoryFragment(arr));
-            fragmentTransaction.commit();
-        });
-    }
-
-    // Метод для открытия фрагмента со сменой адреса
+    // Метод для смены адреса
     private void changeAddress() {
         UserChangeAddressDialogFragment userChangeAddressDialogFragment = new UserChangeAddressDialogFragment();
         userChangeAddressDialogFragment.show(fragmentManager, "");
-    }
-
-    private void changeName() {
-
-    }
-
-    private void changePassword() {
-
     }
 }

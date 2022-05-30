@@ -46,12 +46,12 @@
 
     <Button
         android:id="@+id/d_add_shop_cancel_button"
+        style="@style/DefaultButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
         android:text="Отмена"
-        style="@style/DefaultButton"
         app:layout_constraintStart_toEndOf="@+id/d_add_shop_ok_button"
         app:layout_constraintTop_toBottomOf="@+id/d_add_shop_name" />
 

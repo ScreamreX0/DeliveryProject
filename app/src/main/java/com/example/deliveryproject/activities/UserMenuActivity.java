@@ -124,4 +124,9 @@ public class UserMenuActivity extends AppCompatActivity {
             new UserEmptyCartFragment()
         ));
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }
