@@ -35,6 +35,7 @@ public class UserOrderingActivity extends AppCompatActivity {
     EditText phoneNumberEditText;
     TextView priceTextView;
     TextView deliveryPriceTextView;
+    TextView addressTextView;
     Button confirmButton;
 
     SharedPreferences sharedPreferences;
@@ -55,6 +56,10 @@ public class UserOrderingActivity extends AppCompatActivity {
 
         priceTextView.setText(totalSum + " руб.");
         deliveryPriceTextView.setText("Бесплатно");
+
+        firebaseDatabase.child("Users").child(firebaseAuth.getUid()).child("Address").get().addOnSuccessListener(runnable -> {
+            addressTextView.setText(runnable.getValue().toString());
+        });
 
         confirmButton.setOnClickListener(view -> {
             String checkResult = checkValues();
@@ -96,6 +101,7 @@ public class UserOrderingActivity extends AppCompatActivity {
         priceTextView = findViewById(R.id.a_user_ordering_price);
         deliveryPriceTextView = findViewById(R.id.a_user_ordering_delivery_price);
         confirmButton = findViewById(R.id.a_user_ordering_confirm);
+        addressTextView = findViewById(R.id.a_user_ordering_address);
 
         sharedPreferences = getSharedPreferences("Cart", Context.MODE_PRIVATE);
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
