@@ -41,14 +41,14 @@ public class AdminAddShopFragment extends DialogFragment {
 
             DatabaseReference firebase = FirebaseDatabase.getInstance().getReference();
 
-            firebase.child("Shops").get().addOnCompleteListener(runnable -> {
+            firebase.get().addOnCompleteListener(runnable -> {
                 if (!runnable.isSuccessful()) {
                     Toast.makeText(inflater.getContext(), "Плохое соединение с базой", Toast.LENGTH_SHORT).show();
                     this.dismiss();
                     return;
                 }
 
-                for (DataSnapshot dataSnapshot : runnable.getResult().getChildren()) {
+                for (DataSnapshot dataSnapshot : runnable.getResult().child("Shops").getChildren()) {
                     if (dataSnapshot.child("Name").getValue().equals(name)) {
                         Toast.makeText(inflater.getContext(), "Магазин с таким имененем уже существует", Toast.LENGTH_SHORT).show();
                         this.dismiss();
@@ -56,19 +56,64 @@ public class AdminAddShopFragment extends DialogFragment {
                     }
                 }
 
-                HashMap<String, String> shop = new HashMap<>();
-                shop.put("Range", "");
-                shop.put("Name", name);
-                shop.put("Photo path", "");
-                shop.put("isOpen", "false");
-                firebase.child("Shops").child(name).setValue(shop);
+                String moderEmail = ((EditText)view.findViewById(R.id.d_add_shop_email)).getText().toString();
+                if (moderEmail.isEmpty()) {
+                    Toast.makeText(inflater.getContext(), "Почта модератора не должна быть пустой", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                Toast.makeText(inflater.getContext(), "Магазин успешно добавлен", Toast.LENGTH_SHORT).show();
+                String userUid = null;
+                for (DataSnapshot dataSnapshot : runnable.getResult().child("Users").getChildren()) {
+                    if (dataSnapshot.child("Email").getValue().toString().equals(moderEmail)) {
+                        userUid = dataSnapshot.getKey();
+                        if (dataSnapshot.child("PrivilegedSettings").getValue().equals("")) {
 
-                this.dismiss();
+                            // Создание и добавление ресторана
+                            addShop(name, firebase);
+
+                            // Добавление модератора
+                            settingClient(name, userUid);
+
+                            Toast.makeText(inflater.getContext(), "Магазин успешно добавлен", Toast.LENGTH_SHORT).show();
+                            this.dismiss();
+                        } else {
+                            Toast.makeText(inflater.getContext(), "Этот пользователь модерирует другое заведение", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        break;
+                    }
+                }
+
+                if (userUid == null) {
+                    Toast.makeText(inflater.getContext(), "Пользователь не найден", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                addShop(name, firebase);
             });
         });
 
         return view;
+    }
+
+    private void addShop(String name, DatabaseReference firebase) {
+        HashMap<String, String> shop = new HashMap<>();
+        shop.put("Range", "");
+        shop.put("Name", name);
+        shop.put("Photo path", "");
+        shop.put("isOpen", "false");
+        firebase.child("Shops").child(name).setValue(shop);
+    }
+
+    private void settingClient(String name, String userUid) {
+        HashMap<String, String> privilegedSettings = new HashMap<>();
+        privilegedSettings.put("Name", name);
+        privilegedSettings.put("Type", "Shop");
+
+        DatabaseReference userRef = FirebaseDatabase.getInstance()
+                .getReference("Users")
+                .child(userUid);
+        userRef.child("PrivilegedSettings").setValue(privilegedSettings);
+        userRef.child("Role").setValue("Moderator");
     }
 }

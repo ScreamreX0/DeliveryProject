@@ -87,6 +87,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     map.put("Address", address);
                     map.put("Balance", "1000");
                     map.put("PrivilegedSettings", "");
+                    map.put("Email", user.getEmail());
 
                     // Установка значений пользователю
                     usersDbRef.child(user.getUid()).setValue(map);

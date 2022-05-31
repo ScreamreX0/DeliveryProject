@@ -123,15 +123,31 @@ public class AdminRestaurantsAdapter extends ArrayAdapter<Object> implements Fil
             // Слушатель положительной кнопки
             builder.setPositiveButton("Да", (dialogInterface, i) -> {
                 // Получение конкретного ресторана. Слушатель ответа от базы
-                firebaseDatabase.child("Restaurants").get().addOnCompleteListener(runnable -> {
+                firebaseDatabase.get().addOnCompleteListener(runnable -> {
                     if (!runnable.isSuccessful()) {
                         // Не удалось получить ответ от базы
                         Toast.makeText(context, "Плохое соединение с базой", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
+                    for (DataSnapshot user : runnable.getResult().child("Users").getChildren()) {
+                        if (!user.child("PrivilegedSettings").getValue().equals("")) {
+                            if (user.child("PrivilegedSettings").child("Name").getValue().equals(dataSnapshot.getKey())) {
+                                firebaseDatabase.child("Users")
+                                        .child(user.getKey())
+                                        .child("PrivilegedSettings")
+                                        .setValue("");
+                                firebaseDatabase.child("Users")
+                                        .child(user.getKey())
+                                        .child("Role")
+                                        .setValue("Client");
+                                break;
+                            }
+                        }
+                    }
+
                     // Проверка на количество ресторанов
-                    if (runnable.getResult().getChildrenCount() <= 1) {
+                    if (runnable.getResult().child("Restaurants").getChildrenCount() <= 1) {
                         // Ресторанов больше не осталось. Устанавливается пустое значение
                         firebaseDatabase.child("Restaurants").setValue("");
                     } else {

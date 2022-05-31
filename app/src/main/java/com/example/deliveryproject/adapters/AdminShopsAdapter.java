@@ -102,9 +102,10 @@ public class AdminShopsAdapter extends ArrayAdapter<Object> implements Filterabl
             closedRadioButton.setChecked(true);
         }
 
+        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
+
         // Слушатель группы кнопок открытия и закрытия ресторана
         openRadioButton.setOnCheckedChangeListener((compoundButton, b) -> {
-            DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
             if (b) {
                 firebaseDatabase.child("Shops").child(dataSnapshot.getKey()).child("isOpen").setValue("true");
             } else {
@@ -119,17 +120,34 @@ public class AdminShopsAdapter extends ArrayAdapter<Object> implements Filterabl
             builder.setPositiveButton("Да", (dialogInterface, i) -> {
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
-                databaseReference.child("Shops").get().addOnCompleteListener(runnable -> {
+                databaseReference.get().addOnCompleteListener(runnable -> {
                     if (!runnable.isSuccessful()) {
                         Toast.makeText(context, "Плохое соединение с базой", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                    if (runnable.getResult().getChildrenCount() <= 1) {
+                    for (DataSnapshot user : runnable.getResult().child("Users").getChildren()) {
+                        if (!user.child("PrivilegedSettings").getValue().equals("")) {
+                            if (user.child("PrivilegedSettings").child("Name").getValue().equals(dataSnapshot.getKey())) {
+                                firebaseDatabase.child("Users")
+                                        .child(user.getKey())
+                                        .child("PrivilegedSettings")
+                                        .setValue("");
+                                firebaseDatabase.child("Users")
+                                        .child(user.getKey())
+                                        .child("Role")
+                                        .setValue("Client");
+                                break;
+                            }
+                        }
+                    }
+
+                    if (runnable.getResult().child("Shops").getChildrenCount() <= 1) {
                         databaseReference.child("Shops").setValue("");
                     } else {
                         databaseReference.child("Shops").child(dataSnapshot.getKey()).removeValue();
                     }
+
                     Toast.makeText(context, "Магазин успешно удален", Toast.LENGTH_SHORT).show();
                     dialogInterface.dismiss();
                 });
