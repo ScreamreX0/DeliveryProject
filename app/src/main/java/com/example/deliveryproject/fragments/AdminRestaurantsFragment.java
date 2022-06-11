@@ -28,8 +28,7 @@ public class AdminRestaurantsFragment extends Fragment {
     FragmentManager fragmentManager;
     AdminRestaurantsAdapter adapter;
 
-    public AdminRestaurantsFragment(List<DataSnapshot> items,
-                              FragmentManager fragmentManager) {
+    public AdminRestaurantsFragment(List<DataSnapshot> items, FragmentManager fragmentManager) {
         this.items = (ArrayList<DataSnapshot>) items;
         this.fragmentManager = fragmentManager;
     }
@@ -49,6 +48,7 @@ public class AdminRestaurantsFragment extends Fragment {
         );
         listView.setAdapter(this.adapter);
 
+        // Настройка поиска
         SearchView searchView = view.findViewById(R.id.f_admin_restaurants_search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -65,6 +65,8 @@ public class AdminRestaurantsFragment extends Fragment {
         });
 
         FloatingActionButton fab = view.findViewById(R.id.f_admin_rests_floating_button);
+
+        // Слушатель кнопки добавить ресторан
         fab.setOnClickListener(view1 -> {
             AdminAddRestFragment adminEditRestFragment = new AdminAddRestFragment();
             adminEditRestFragment.show(fragmentManager, "");

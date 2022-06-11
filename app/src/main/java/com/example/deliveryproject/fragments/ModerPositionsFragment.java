@@ -29,6 +29,10 @@ public class ModerPositionsFragment extends Fragment {
     ArrayList<DataSnapshot> items;
     ModerPositionsAdapter adapter;
 
+    FragmentManager fragmentManager;
+    String type;
+    String name;
+
     public ModerPositionsFragment(List<DataSnapshot> items,
                                   FragmentManager fragmentManager,
                                   String type,
@@ -38,15 +42,13 @@ public class ModerPositionsFragment extends Fragment {
         this.type = type;
         this.name = name;
     }
-    FragmentManager fragmentManager;
-    String type;
-    String name;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_moder_positions, container, false);
 
+        // Получение ссылки на заведение
         DatabaseReference menuRef;
         if (type.equals("Shop")) {
             menuRef = FirebaseDatabase.getInstance().getReference().child("Shops").child(name).child("Range");
@@ -70,12 +72,14 @@ public class ModerPositionsFragment extends Fragment {
                     getActivity());
         }
 
+        // Настройка recyclerView
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         RecyclerView recyclerView = view.findViewById(R.id.f_moder_positions_recycle_view);
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
+        // Настройка поиска
         SearchView searchView = view.findViewById(R.id.f_moder_positions_search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -92,6 +96,8 @@ public class ModerPositionsFragment extends Fragment {
         });
 
         FloatingActionButton fab = view.findViewById(R.id.f_moder_positions_floating_button);
+
+        // Слушатель нажатия на кнопку добавления позиции
         fab.setOnClickListener(view1 -> {
             ModerAddPositionFragment moderAddPositionFragment = new ModerAddPositionFragment(
                     menuRef

@@ -27,11 +27,14 @@ public class AdminAddRestFragment extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_add_rest, container, false);
 
+        // Слушатель нажатия на кнопку отмены
         view.findViewById(R.id.d_add_rest_cancel_button).setOnClickListener(view1 -> {
             this.dismiss();
         });
 
+        // Слушатель нажатия на кнопку ОК
         view.findViewById(R.id.d_add_rest_ok_button).setOnClickListener(view1 -> {
+            // Проверка на пустые поля
             String name = ((EditText)view.findViewById(R.id.d_add_rest_name)).getText().toString();
             if (name.replace(" ", "").equals("")) {
                 Toast.makeText(inflater.getContext(), "Поле должно быть заполнено", Toast.LENGTH_SHORT).show();
@@ -41,13 +44,16 @@ public class AdminAddRestFragment extends DialogFragment {
 
             DatabaseReference firebase = FirebaseDatabase.getInstance().getReference();
 
+            // Получение базы данных
             firebase.get().addOnCompleteListener(runnable -> {
+                // Проверка на ответ базы
                 if (!runnable.isSuccessful()) {
                     Toast.makeText(inflater.getContext(), "Плохое соединение с базой", Toast.LENGTH_SHORT).show();
                     this.dismiss();
                     return;
                 }
 
+                // Проверка ресторана на совпадение имен
                 for (DataSnapshot dataSnapshot : runnable.getResult().child("Restaurants").getChildren()) {
                     if (dataSnapshot.child("Name").getValue().equals(name)) {
                         Toast.makeText(inflater.getContext(), "Ресторан с таким имененем уже существует", Toast.LENGTH_SHORT).show();
@@ -58,11 +64,13 @@ public class AdminAddRestFragment extends DialogFragment {
 
                 String moderEmail = ((EditText)view.findViewById(R.id.d_add_rest_email)).getText().toString();
 
+                // Проверка на пустое поле
                 if (moderEmail.isEmpty()) {
                     Toast.makeText(inflater.getContext(), "Почта модератора не должна быть пустой", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
+                // Добавление ресторана
                 String userUid = null;
                 for (DataSnapshot dataSnapshot : runnable.getResult().child("Users").getChildren()) {
                     if (dataSnapshot.child("Email").getValue().toString().equals(moderEmail)) {

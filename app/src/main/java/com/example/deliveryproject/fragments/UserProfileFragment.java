@@ -46,6 +46,7 @@ public class UserProfileFragment extends Fragment {
         String name = "";
         String abbrev = "";
 
+        // Установка аббревиатуры
         if (fullName.split(" ").length == 1) {
             name = fullName.split(" ")[0];
             abbrev = String.valueOf(fullName.split(" ")[0].charAt(0));
@@ -61,6 +62,7 @@ public class UserProfileFragment extends Fragment {
         ((TextView)view.findViewById(R.id.f_profile_abbrev_tv)).setText(abbrev);
         ((TextView)view.findViewById(R.id.f_profile_full_name)).setText(name);
 
+        // Настройка listView
         ListView listView = view.findViewById(R.id.f_profile_settings_list);
         listView.setAdapter(new UserSettingsAdapter(container.getContext(), 0, new Items.Setting[] {
                 new Items.Setting("История заказов"),

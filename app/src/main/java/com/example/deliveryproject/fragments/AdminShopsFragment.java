@@ -27,8 +27,7 @@ public class AdminShopsFragment extends Fragment {
     FragmentManager fragmentManager;
     AdminShopsAdapter adapter;
 
-    public AdminShopsFragment(List<DataSnapshot> items,
-                              FragmentManager fragmentManager) {
+    public AdminShopsFragment(List<DataSnapshot> items, FragmentManager fragmentManager) {
         this.items = (ArrayList<DataSnapshot>) items;
         this.fragmentManager = fragmentManager;
     }
@@ -47,6 +46,7 @@ public class AdminShopsFragment extends Fragment {
         );
         listView.setAdapter(this.adapter);
 
+        // Настройка поиска
         SearchView searchView = view.findViewById(R.id.f_admin_shops_search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -63,6 +63,8 @@ public class AdminShopsFragment extends Fragment {
         });
 
         FloatingActionButton fab = view.findViewById(R.id.f_admin_shops_floating_button);
+
+        // Слушатель кнопки добавить магазин
         fab.setOnClickListener(view1 -> {
             AdminAddShopFragment adminAddShopFragment = new AdminAddShopFragment();
             adminAddShopFragment.show(fragmentManager, "");

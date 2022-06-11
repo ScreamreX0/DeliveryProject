@@ -35,9 +35,9 @@ public class UserCartFragment extends Fragment {
         this.fragment = fragment;
 
         clearSharedPreferences(preferences);
-
     }
 
+    // Метод для очистки внутреннего хранилища
     private void clearSharedPreferences(SharedPreferences sharedPreferences) {
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -56,6 +56,7 @@ public class UserCartFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
 
+        // Проверка на размер внутреннго хранилища
         if (preferences.getAll().size() == 0) {
             ((ConstraintLayout)view.findViewById(R.id.f_cart_constr_layout)).removeAllViews();
 
@@ -78,6 +79,7 @@ public class UserCartFragment extends Fragment {
                 fragmentManager,
                 fragment);
 
+        // Настройка recycler view
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         RecyclerView recyclerView = view.findViewById(R.id.f_cart_recycle_view);
 
@@ -87,6 +89,7 @@ public class UserCartFragment extends Fragment {
         return view;
     }
 
+    // Метод для получения суммы заказа
     private float getTotalSum() {
         float sum = 0;
 

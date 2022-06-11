@@ -17,13 +17,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class AdminEditRestFragment extends DialogFragment {
+    String restKey;
+    String restName;
+
     public AdminEditRestFragment(String restKey, String restName) {
         this.restKey = restKey;
         this.restName = restName;
     }
-
-    String restKey;
-    String restName;
 
     @Nullable
     @Override
@@ -36,10 +36,12 @@ public class AdminEditRestFragment extends DialogFragment {
 
         editText.setText(restName);
 
+        // Слушатель кнопки ОТМЕНА
         cancel.setOnClickListener(view1 -> {
             getDialog().dismiss();
         });
 
+        // Слушатель кнопки ОК
         ok.setOnClickListener(view1 -> {
             if (editText.getText().toString().replace(" ", "").equals("")) {
                 Toast.makeText(getContext(), "Поле должно быть заполнено", Toast.LENGTH_SHORT).show();

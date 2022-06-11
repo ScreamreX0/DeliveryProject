@@ -40,12 +40,14 @@ public class UserProductsFragment extends Fragment {
 
         this.adapter = new UserProductsAdapter(items, getContext(), shopName);
 
+        // Настройка recycler view
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         RecyclerView recyclerView = view.findViewById(R.id.f_products_recycle_view);
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
+        // Настройка поиска
         SearchView searchView = view.findViewById(R.id.f_products_search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

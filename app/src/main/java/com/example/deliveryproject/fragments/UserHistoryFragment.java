@@ -34,6 +34,7 @@ public class UserHistoryFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
 
+        // Настройка recycler view
         UserHistoryAdapter adapter = new UserHistoryAdapter(container, view, items);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         RecyclerView recyclerView = view.findViewById(R.id.f_history_recycle_view);

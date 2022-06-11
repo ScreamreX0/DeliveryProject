@@ -50,38 +50,53 @@ public class UserOrderingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_ordering);
         init();
 
+        // Настройка toolbar'а
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // Установка общей стоимости заказа
         priceTextView.setText(totalSum + " руб.");
+
+        // Установка цены за доставку
         deliveryPriceTextView.setText("Бесплатно");
 
+        // Получение адреса пользователя
         firebaseDatabase.child("Users").child(firebaseAuth.getUid()).child("Address").get().addOnSuccessListener(runnable -> {
+            // Установка адреса пользователя
             addressTextView.setText(runnable.getValue().toString());
         });
 
+        // Слушатель на кнопку подтверждения
         confirmButton.setOnClickListener(view -> {
+            // Проверка полей
             String checkResult = checkValues();
             if (!checkResult.equals("ok")) {
                 Toast.makeText(this, checkResult, Toast.LENGTH_SHORT).show();
                 return;
             }
 
+            // Получение баланса пользователя
             firebaseDatabase.child("Users")
                     .child(firebaseAuth.getUid())
                     .child("Balance")
                     .get()
                     .addOnSuccessListener(runnable -> {
                         float currentBalance = Float.parseFloat(runnable.getValue().toString());
+
+                        // Проверка платежеспособности
                         if (currentBalance >= totalSum) {
+                            // Ввод в базу истории заказов
                             insertToHistory(currentBalance);
 
+                            // Очищение корзины
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.clear();
                             editor.apply();
 
                             Toast.makeText(this, "Заказ принят", Toast.LENGTH_SHORT).show();
+
+                            // Запуск окна пользовательского меню
                             startActivity(new Intent(this, UserMenuActivity.class));
                         } else {
                             Toast.makeText(this, "Недостаточно средств", Toast.LENGTH_SHORT).show();
@@ -110,6 +125,7 @@ public class UserOrderingActivity extends AppCompatActivity {
         totalSum = getTotalSum();
     }
 
+    // Метод для проверки введенных полей
     private String checkValues() {
         // Entrance check
         String entrance = entranceEditText.getText().toString();
@@ -144,10 +160,12 @@ public class UserOrderingActivity extends AppCompatActivity {
         return "ok";
     }
 
+    // Метод для получения суммы заказа
     private float getTotalSum() {
         return (float) getIntent().getExtras().get("TotalSum");
     }
 
+    // Метод для записи истории заказов
     @SuppressLint("SimpleDateFormat")
     private void insertToHistory(float currentBalance) {
         List<String> keys = new ArrayList<>(sharedPreferences.getAll().keySet());
@@ -166,6 +184,7 @@ public class UserOrderingActivity extends AppCompatActivity {
         balanceSubtract(currentBalance);
     }
 
+    // Метод для получения hashmap'а истории продуктов для последующей записи в базу
     private HashMap<String, HashMap<String, String>> getHistoryProducts(List<String> keys, List<String> values) {
         HashMap<String, HashMap<String, String>> productsMap = new HashMap<>();
         for (int i = 0; i < keys.size(); i++) {
@@ -181,6 +200,7 @@ public class UserOrderingActivity extends AppCompatActivity {
         return productsMap;
     }
 
+    // Метод для вычета из баланса суммы заказа
     private void balanceSubtract(float currentBalance) {
         firebaseDatabase.child("Users")
                 .child(firebaseAuth.getUid())

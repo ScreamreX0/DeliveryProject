@@ -34,8 +34,11 @@ public class UserRestaurantsFragment extends Fragment {
         ListView listView = view.findViewById(R.id.f_restaurants_scroll_view);
 
         this.adapter = new UserRestaurantsAdapter(getContext(), items.toArray());
+
+        // Настройка list view
         listView.setAdapter(this.adapter);
 
+        // Настройка поиска
         SearchView searchView = view.findViewById(R.id.f_restaurants_search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

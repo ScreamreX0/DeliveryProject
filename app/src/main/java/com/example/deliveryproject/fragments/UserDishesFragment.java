@@ -36,12 +36,15 @@ public class UserDishesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dishes, container, false);
 
         adapter = new UserDishesAdapter(items, getContext(), shopName);
+
+        // Настройка recyclerView
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         RecyclerView recyclerView = view.findViewById(R.id.f_dishes_recycle_view);
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
+        // Настройка поиска
         SearchView searchView = view.findViewById(R.id.f_dishes_search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

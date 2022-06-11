@@ -30,11 +30,14 @@ public class UserChangeAddressDialogFragment extends DialogFragment {
 
         EditText editText = view.findViewById(R.id.d_change_address_field);
 
+        // Слушатель кнопки ОТМЕНА
         view.findViewById(R.id.d_change_address_cancel).setOnClickListener(view1 -> {
             getDialog().dismiss();
         });
 
+        // Слушатель кнопки ОК
         view.findViewById(R.id.d_change_address_change).setOnClickListener(view1 -> {
+            // Проверка на пустые поля
             if (editText.getText().toString().replace(" ", "").equals("")) {
                 Toast.makeText(getContext(), "Поле должно быть заполнено", Toast.LENGTH_SHORT).show();
                 return;
@@ -43,6 +46,7 @@ public class UserChangeAddressDialogFragment extends DialogFragment {
             DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
             FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
+            // Смена адреса пользователя
             firebaseDatabase.child("Users").child(firebaseAuth.getUid()).child("Address").setValue(editText.getText().toString());
 
             Toast.makeText(getContext(), "Адрес успешно изменен", Toast.LENGTH_SHORT).show();

@@ -18,15 +18,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ModerEditPriceFragment extends DialogFragment {
+    DataSnapshot position;
+    String type;
+    String name;
+
     public ModerEditPriceFragment(DataSnapshot position, String type, String name) {
         this.position = position;
         this.type = type;
         this.name = name;
     }
-
-    DataSnapshot position;
-    String type;
-    String name;
 
     @Nullable
     @Override
@@ -39,21 +39,26 @@ public class ModerEditPriceFragment extends DialogFragment {
 
         editText.setText(position.child("Price").getValue().toString());
 
+        // Слушатель кнопки ОТМЕНА
         cancel.setOnClickListener(view1 -> {
             getDialog().dismiss();
         });
 
+        // Слушатель кнопки ОК
         ok.setOnClickListener(view1 -> {
+            // Проверка на пустые поля
             if (editText.getText().toString().replace(" ", "").equals("")) {
                 Toast.makeText(getContext(), "Поле должно быть заполнено", Toast.LENGTH_SHORT).show();
                 return;
             }
 
+            // Проверка на неизмененную цену
             if (editText.getText().toString().equals(position.child("Price").getValue().toString())) {
                 this.dismiss();
                 return;
             }
 
+            // Проверка введеной строки является ли она числом
             if (!isNumeric(editText.getText().toString())) {
                 Toast.makeText(getContext(), "Введите число", Toast.LENGTH_SHORT).show();
                 return;
@@ -64,6 +69,7 @@ public class ModerEditPriceFragment extends DialogFragment {
                 menuType = "Range";
             }
 
+            // Изменение цены
             DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
             firebaseDatabase
                     .child(type)
@@ -80,6 +86,7 @@ public class ModerEditPriceFragment extends DialogFragment {
         return view;
     }
 
+    // Метод для проверки строки является ли она числом
     public static boolean isNumeric(String str) {
         try {
             Double.parseDouble(str);

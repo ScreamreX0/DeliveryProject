@@ -18,15 +18,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ModerEditNameFragment extends DialogFragment {
+    DataSnapshot position;
+    String type;
+    String name;
+
     public ModerEditNameFragment(DataSnapshot position, String type, String name) {
         this.position = position;
         this.type = type;
         this.name = name;
     }
-
-    DataSnapshot position;
-    String type;
-    String name;
 
     @Nullable
     @Override
@@ -39,16 +39,20 @@ public class ModerEditNameFragment extends DialogFragment {
 
         editText.setText(position.child("Name").getValue().toString());
 
+        // Слушатель кнопки ОТМЕНА
         cancel.setOnClickListener(view1 -> {
             getDialog().dismiss();
         });
 
+        // Слушатель кнопки ОК
         ok.setOnClickListener(view1 -> {
+            // Проверка пустых полей
             if (editText.getText().toString().replace(" ", "").equals("")) {
                 Toast.makeText(getContext(), "Поле должно быть заполнено", Toast.LENGTH_SHORT).show();
                 return;
             }
 
+            // Проверка на неизмененное поле
             if (editText.getText().toString().equals(position.child("Name").getValue().toString())) {
                 this.dismiss();
                 return;
@@ -59,6 +63,7 @@ public class ModerEditNameFragment extends DialogFragment {
                 menuType = "Range";
             }
 
+            // Изменение названия заведения
             DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
             firebaseDatabase
                     .child(type)

@@ -42,10 +42,12 @@ public class UserShopsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_shops, container, false);
 
+        // Настройка listView
         ListView listView = view.findViewById(R.id.f_shops_scroll_view);
         this.adapter = new UserShopsAdapter(getContext(), items.toArray());
         listView.setAdapter(this.adapter);
 
+        // Настройка поиска
         SearchView searchView = view.findViewById(R.id.f_shops_search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

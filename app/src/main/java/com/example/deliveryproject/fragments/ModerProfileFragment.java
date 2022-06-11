@@ -23,6 +23,7 @@ public class ModerProfileFragment extends Fragment {
     public ModerProfileFragment(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
     }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class ModerProfileFragment extends Fragment {
         String name = "";
         String abbrev = "";
 
+        // Установка аббревиатуры
         if (fullName.split(" ").length == 1) {
             name = fullName.split(" ")[0];
             abbrev = String.valueOf(fullName.split(" ")[0].charAt(0));
@@ -51,6 +53,8 @@ public class ModerProfileFragment extends Fragment {
         ((TextView)view.findViewById(R.id.f_moder_profile_full_name)).setText(name);
 
         ListView listView = view.findViewById(R.id.f_moder_profile_settings_list);
+
+        // Настройка listView
         listView.setAdapter(new ModerSettingsAdapter(container.getContext(), 0, new Items.Setting[] {
                 new Items.Setting("Изменить адрес"),
                 new Items.Setting("Выход")

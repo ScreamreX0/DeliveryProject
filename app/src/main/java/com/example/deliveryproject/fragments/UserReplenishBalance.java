@@ -22,14 +22,17 @@ public class UserReplenishBalance extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_replenish_balance, container, false);
 
+        // Слушатель кнопки ОТМЕНА
         view.findViewById(R.id.f_replenish_balance_cancel).setOnClickListener(view1 -> {
             dismiss();
         });
 
+        // Слушатель кнопки ОК
         view.findViewById(R.id.f_replenish_balance_apply).setOnClickListener(view1 -> {
             TextView cartNumberTextView = view.findViewById(R.id.f_replenish_balance_cart_number);
             TextView sumTextView = view.findViewById(R.id.f_replenish_balance_sum);
 
+            // Проверки на форматы
             if (cartNumberTextView.getText().toString().isEmpty()
                     || cartNumberTextView.getText().toString().length() != 16) {
                 Toast.makeText(inflater.getContext(), "Неверный формат банковской карты", Toast.LENGTH_SHORT).show();
@@ -53,11 +56,13 @@ public class UserReplenishBalance extends DialogFragment {
                 return;
             }
 
+            // Получение текущего баланса пользователя
             DatabaseReference balanceRef = FirebaseDatabase.getInstance()
                     .getReference("Users")
                     .child(FirebaseAuth.getInstance().getUid())
                     .child("Balance");
 
+            // Добавление к текущему балансу введенной суммы
             balanceRef.get().addOnSuccessListener(runnable -> {
                 balanceRef.setValue(Float.parseFloat(runnable.getValue().toString()) + sum);
             });
@@ -68,6 +73,7 @@ public class UserReplenishBalance extends DialogFragment {
         return view;
     }
 
+    // Метод для проверки строки является ли она числом
     private boolean isNumber(String number) {
         try {
             Float.parseFloat(number);

@@ -125,7 +125,7 @@ public class UserShopsAdapter extends ArrayAdapter<Object> implements Filterable
         }
     };
 
-
+    // Метод для установки изображения
     private void setImage(ImageView imageView, String photoName) {
         if (photoName.equals("")) {
             return;
@@ -143,6 +143,7 @@ public class UserShopsAdapter extends ArrayAdapter<Object> implements Filterable
                 });
     }
 
+    // Метод для открытия/закрытия магазина
     private void setOpen(TextView isOpenTv, String isOpen, ConstraintLayout layout) {
         if (isOpen.equals("true")) {
             isOpenTv.setText("Открыто");

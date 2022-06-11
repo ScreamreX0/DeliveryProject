@@ -19,7 +19,7 @@ import com.example.deliveryproject.adapters.UserSettingsAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminProfileFragment extends Fragment {
-FragmentManager fragmentManager;
+    FragmentManager fragmentManager;
 
     public AdminProfileFragment(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
@@ -36,6 +36,7 @@ FragmentManager fragmentManager;
         String name = "";
         String abbrev = "";
 
+        // Добавление аббревиатуры
         if (fullName.split(" ").length == 1) {
             name = fullName.split(" ")[0];
             abbrev = String.valueOf(fullName.split(" ")[0].charAt(0));

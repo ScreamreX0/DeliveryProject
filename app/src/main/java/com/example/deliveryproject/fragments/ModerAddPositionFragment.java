@@ -19,24 +19,28 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 
 public class ModerAddPositionFragment extends DialogFragment {
+    DatabaseReference menuRef;
+
     public ModerAddPositionFragment(DatabaseReference menuRef) {
         this.menuRef = menuRef;
     }
-    DatabaseReference menuRef;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_add_position, container, false);
 
+        // Слушатель кнопки ОТМЕНА
         view.findViewById(R.id.d_add_position_cancel_button).setOnClickListener(view1 -> {
             this.dismiss();
         });
 
+        // Слушатель кнопки ОК
         view.findViewById(R.id.d_add_position_ok_button).setOnClickListener(view1 -> {
             String name = ((EditText)view.findViewById(R.id.d_add_position_name)).getText().toString();
             String price = ((EditText)view.findViewById(R.id.d_add_position_price)).getText().toString();
 
+            // Проверка на заполненные поля
             if (name.replace(" ", "").equals("")
                     || price.replace(" ", "").equals("")) {
                 Toast.makeText(inflater.getContext(), "Поле должно быть заполнено", Toast.LENGTH_SHORT).show();
@@ -44,19 +48,23 @@ public class ModerAddPositionFragment extends DialogFragment {
                 return;
             }
 
+            // Проверка введенной строки является ли она числом
             if (!isNumeric(price)) {
                 Toast.makeText(inflater.getContext(), "В поле цена должно быть число", Toast.LENGTH_SHORT).show();
                 this.dismiss();
                 return;
             }
 
+            // Получение базы данных
             menuRef.get().addOnCompleteListener(runnable -> {
+                // Проверка на полученный ответ
                 if (!runnable.isSuccessful()) {
                     Toast.makeText(inflater.getContext(), "Плохое соединение с базой", Toast.LENGTH_SHORT).show();
                     this.dismiss();
                     return;
                 }
 
+                // Проверка на совпадение имен
                 for (DataSnapshot dataSnapshot : runnable.getResult().getChildren()) {
                     if (dataSnapshot.child("Name").getValue().equals(name)) {
                         Toast.makeText(inflater.getContext(), "Позиция с таким имененем уже существует", Toast.LENGTH_SHORT).show();
@@ -65,7 +73,7 @@ public class ModerAddPositionFragment extends DialogFragment {
                     }
                 }
 
-
+                // Добавление новой позиции
                 HashMap<String, String> position = new HashMap<>();
                 position.put("Name", name);
                 position.put("Photo path", "");
@@ -80,6 +88,7 @@ public class ModerAddPositionFragment extends DialogFragment {
         return view;
     }
 
+    // Метод для проверки является ли стркоа числом
     public static boolean isNumeric(String str) {
         try {
             Double.parseDouble(str);
